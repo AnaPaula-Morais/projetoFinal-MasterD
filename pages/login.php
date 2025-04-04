@@ -1,5 +1,6 @@
 <?php 
-  include "./header.php";
+  include "../header.php";
+  include "../config.php";
 ?>
 
 <!DOCTYPE html>
@@ -31,12 +32,13 @@
 
           <div class="form-floating">
             <input
-              type="text"
+              type="email"
               class="form-control"
               id="floatingInput"
-              placeholder="Username"
+              name="email"
+              placeholder="email"
             />
-            <label for="floatingInput">Username</label>
+            <label for="floatingInput">Email</label>
           </div>
           <div class="form-floating">
             <input
@@ -76,7 +78,7 @@
         <div id="emailHelp" class="form-text">
           Não tem conta?
         </div>
-        <button  type="submit" class="btn btn-primary">Registre-se aqui</button>
+        <button  type="submit" class="btn btn-primary" onclick="window.location.href='registroCliente.php'">Registre-se aqui</button>
       </main>
     </div>
 

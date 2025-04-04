@@ -15,7 +15,7 @@
           <div class="container-fluid">
             
                 <a class="navbar-brand" href="./index.html">
-                  <img src="./assets/images/logo.png" alt="logo" width="70" height="auto">
+                  <img src="../assets/images/logo.png" alt="logo" width="70" height="auto">
                 </a>
              
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
             </div>
             <div class="d-flex ">
               <i class="fa fa-search mx-3" style="font-size:20px; color: white; margin-right: 20px;"></i>
-              <a href="./pages/login.html">
+              <a href="../pages/login.php">
                 <i class="fa fa-user-circle-o mx-3" style="font-size:20px; color: white; margin-right: 20px;"></i>
               </a>
               <i class="fa fa-cart-plus mx-3" style="font-size:20px; color: white; margin-right: 20px;"></i>

@@ -1,5 +1,37 @@
 <?php 
-  include "./header.php";
+  include "../header.php";
+  include "../config.php";
+
+  //verificar se o formulario foi submetido
+
+  if($_SERVER["REQUEST_METHOD"] == "POST"){
+    //obter os dados do formulário
+    $nome = $_POST["nome"];
+    $apelido = $_POST["apelido"];
+    $email = $_POST["email"];
+    $senha = $_POST["senha"];
+
+  //evitar injeção de sql nas strings
+
+  //inserir os dados na tabela clientes - query sql
+    $sql = "INSERT INTO clientes(nome, apelido, email, senha, user_type) VALUES ('$nome', '$apelido', '$email', '$senha', 'user')"; 
+  //executar a query
+    if($conn -> query ("$sql") == true){
+      echo"Registo realizado com sucesso!";
+    
+  //redirecionar para apágina de login, depois do registro bem sucedido 
+      header('location: login.php');
+ 
+  //sair após o redirecionamento
+      exit();
+  }else{
+    //mostrar erros caso não seja possível oregistro
+    echo "Erro encontrado: " .$conn->error;
+  }
+  //fechar a ligação a base de dados
+  $conn->close();
+  
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +57,7 @@
     
     <div class="form-login">
       <main class="form-signin w-100 m-auto">
-        <form>
+        <form method="post" action="registroCliente.php">
           <h1 class="h3 mb-3 fw-normal">Registe-se</h1>
 
           <div class="form-floating">
@@ -33,6 +65,7 @@
               type="text"
               class="form-control"
               id="floatingInput"
+              name="nome"
               placeholder="nome"
             />
             <label for="floatingInput">Nome</label>
@@ -42,16 +75,17 @@
               type="text"
               class="form-control"
               id="floatingInput"
+              name="apelido"
               placeholder="apelido"
             />
             <label for="floatingInput">Apelido</label>
           </div>
-          <div class="form-floating">
+          <!--<div class="form-floating">
             <input class="form-control" type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
             <label for="telefone">Telefone</label>
-          </div>
+          </div>-->
           <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com">
             <label for="floatingInput">Email</label>
           </div>
           <div class="form-floating">
@@ -59,22 +93,15 @@
               type="password"
               class="form-control"
               id="floatingPassword"
+              name="senha"
               placeholder="Password"
             />
             <label for="floatingPassword">Password</label>
           </div>
 
-          <div class="form-floating">
-            <input
-              type="password"
-              class="form-control"
-              id="floatingPassword"
-              placeholder="Confirmar Password"
-            />
-            <label for="floatingPassword">Confirmar password</label>
-          </div>
+          
 
-          <div class="form-floating">
+          <!--<div class="form-floating">
             <input
               type="text"
               class="form-control"
@@ -102,12 +129,14 @@
             placeholder="NIF"
           />
           <label for="floatingInput">NIF</label>
-        </div>
+        </div>-->
+
+          <button class="btn btn-primary w-100 py-2" type="submit">
+            Registar
+          </button>
         </form>
 
-        <button class="btn btn-primary w-100 py-2" type="submit">
-          Registar
-        </button>
+        
         _________________________________________________________________
 
         <div id="emailHelp" class="form-text">Já tem conta?</div>
