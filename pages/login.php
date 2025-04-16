@@ -1,6 +1,38 @@
 <?php 
   include "../header.php";
   include "../config.php";
+
+  //verificar se o formulário foi enviado
+
+  if($_SERVER["REQUEST_METHOD"] == "POST"){
+      //obter os dados inseridos no formulário
+      $email = $_POST["email"];
+      $senha = $_POST["senha"];
+
+    //consulta a base de dados para consultar as informações
+
+    $sql = "SELECT * FROM clientes WHERE email = '$email' AND senha = '$senha'";
+    $result = $conn -> query($sql);
+    if($result ->num_rows > 0){
+      $user = $result->fetch_assoc();
+
+      //verificar o tipo de utilizador
+      if($user['user_type'] == 'user'){
+        //redireciona para a página do user
+        header("location: perfil-utilizador.php");
+        exit();
+
+      }elseif($user['user_type'] == 'admin'){
+        header("location: perfil-admin.php");
+        exit();
+      }
+    }else{
+      echo "As credenciais são inválidas!";
+    }
+  }
+  //fechar a conexao a base de dados
+
+  $conn -> close();
 ?>
 
 <!DOCTYPE html>
@@ -27,14 +59,14 @@
 
     <div class="form-login">
       <main class="form-signin w-100 m-auto">
-        <form>
+        <form method="post">
           <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
           <div class="form-floating">
             <input
               type="email"
               class="form-control"
-              id="floatingInput"
+              id="email"
               name="email"
               placeholder="email"
             />
@@ -44,7 +76,8 @@
             <input
               type="password"
               class="form-control"
-              id="floatingPassword"
+              id="senha"
+              name="senha"
               placeholder="Password"
             />
             <label for="floatingPassword">Password</label>
@@ -64,12 +97,11 @@
               <p>Esqueceu-se da password? Clique aqui</p>
             </a>
           </div>
-          
-        </form>
-        
-        <button class="btn btn-primary w-100 py-2" type="submit">
+          <button class="btn btn-primary w-100 py-2" type="submit">
           Entrar
         </button>
+        </form>
+        
         _________________________________________________________________
         <a href="#">
           <p>Entrar com o google</p>
