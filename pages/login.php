@@ -1,7 +1,7 @@
 <?php 
-  include "../header.php";
+ 
   include "../config.php";
-
+  $base_path = "../";
   //verificar se o formulário foi enviado
 
   if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -54,8 +54,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
   </head>
-  <body class="p-3 m-0 border-0 bd-example m-0 border-0">
-    
+  <body class="p-0 m-0">
+    <?php  include "../header.php";?>
 
     <div class="form-login">
       <main class="form-signin w-100 m-auto">
