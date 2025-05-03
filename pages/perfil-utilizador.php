@@ -1,6 +1,8 @@
-<?php 
+<?php
+    $base_path = "../";
     include "../header.php";
     include "../config.php";
+   
 
 ?>
 <!DOCTYPE html>

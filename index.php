@@ -24,8 +24,8 @@ $result = $conn->query($sql);
     include "carousel.html";
   ?>
   <div class="container mt-4">
-    <h1>Conheça nossas camisas</h1>
-    <div class="row">
+    <h2 class="p-4 text-center">Nossos Produtos</h2>
+    <div class="row p-4">
       <?php while ($produto = $result->fetch_assoc()): ?>
         <div class="col-md-4 mb-4">
           <div class="card h-100">
@@ -47,6 +47,22 @@ $result = $conn->query($sql);
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <div class="sobre">
+        <h2 class="text-center p-4">Sobre</h2>
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center">
+            <img src="./assets/images/img-sobre2.png" width="400"  alt="">
+          </div>
+          <div class="sobre col-md-6">
+            <p>Somos apaixonados pela cultura vibrante do Cariri cearense. Nossa loja nasceu com o propósito de celebrar e divulgar a rica herança cultural da região através de camisetas exclusivas. Cada estampa é uma homenagem aos ícones, paisagens e tradições que tornam o Cariri único.
+            </p>
+          </div>
+        </div>
+  </div>
+  <div class="container">
+  <?php 
+    include "./pages/footer.php"
+  ?> 
+</div>
 </body>
-
 </html>
