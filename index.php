@@ -6,7 +6,7 @@ $sql = "SELECT produtos.*, categorias.nome AS categoria_nome FROM produtos JOIN 
 $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
@@ -16,6 +16,8 @@ $result = $conn->query($sql);
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <!--link font awesome-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 
 <body class="p-0 m-0">
@@ -39,7 +41,7 @@ $result = $conn->query($sql);
               <p><strong>Estoque:</strong> <?php echo $produto['estoque']; ?></p>
             </div>
             <div class="card-footer d-flex justify-content-between">
-              <a href="carrinho.php?add=<?php echo $produto['id']; ?>" class="btn btn-primary">Comprar</a>
+              <a href="./pages/produto.php?id= <?php echo $produto['id']; ?>" class="btn btn-primary">Comprar</a>
             </div>
           </div>
         </div>

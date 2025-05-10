@@ -1,8 +1,9 @@
 <?php 
- 
+  session_start();
   include "../config.php";
   $base_path = "../";
   //verificar se o formulário foi enviado
+ 
 
   if($_SERVER["REQUEST_METHOD"] == "POST"){
       //obter os dados inseridos no formulário
@@ -16,10 +17,13 @@
     if($result ->num_rows > 0){
       $user = $result->fetch_assoc();
 
+      $_SESSION["cliente_id"] = $user["id"];
+      $_SESSION["cliente_nome"] = $user["nome"];
+
       //verificar o tipo de utilizador
       if($user['user_type'] == 'user'){
         //redireciona para a página do user
-        header("location: perfil-utilizador.php");
+        header("location: ../index.php");
         exit();
 
       }elseif($user['user_type'] == 'admin'){
@@ -30,6 +34,7 @@
       echo "As credenciais são inválidas!";
     }
   }
+  
   //fechar a conexao a base de dados
 
   $conn -> close();
