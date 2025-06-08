@@ -2,9 +2,8 @@
   session_start();
   include "../config.php";
   $base_path = "../";
-  //verificar se o formulário foi enviado
- 
-
+  
+  //verificar se o formulário foi enviado utilizando o método post
   if($_SERVER["REQUEST_METHOD"] == "POST"){
       //obter os dados inseridos no formulário
       $email = $_POST["email"];
@@ -13,10 +12,13 @@
     //consulta a base de dados para consultar as informações
 
     $sql = "SELECT * FROM clientes WHERE email = '$email' AND senha = '$senha'";
+    //executa o sql passado
     $result = $conn -> query($sql);
-    if($result ->num_rows > 0){
+    //verifica se o número de linhas retornado pela consulta sql é > 0, ou seja se encontrou algum registro
+    if($result -> num_rows > 0){
       $user = $result->fetch_assoc();
 
+      //variável global que armazena o id e o nome do utilizador
       $_SESSION["cliente_id"] = $user["id"];
       $_SESSION["cliente_nome"] = $user["nome"];
 
@@ -36,7 +38,6 @@
   }
   
   //fechar a conexao a base de dados
-
   $conn -> close();
 ?>
 

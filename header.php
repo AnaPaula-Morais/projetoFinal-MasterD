@@ -20,7 +20,7 @@
         <div class="mx-auto">
           <ul class="navbar-nav  mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+              <a class="nav-link active text-white" aria-current="page" href="../index.php">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="#" role="button">
@@ -41,7 +41,10 @@
           <a href="./pages/login.php">
             <i class="fa fa-user-circle-o mx-3" style="font-size:20px; color: white; margin-right: 20px;"></i>
           </a>
-          <i class="fa fa-cart-plus mx-3" style="font-size:20px; color: white; margin-right: 20px;"></i>
+          <a href="./pages/carrinho.php">
+            <i class="fa fa-cart-plus mx-3" style="font-size:20px; color: white; margin-right: 20px;"></i>
+          </a>
+          
         </div>
       </div>
     </div>

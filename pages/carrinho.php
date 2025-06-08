@@ -7,8 +7,23 @@ if (!isset($_SESSION["cliente_id"])) {
     header("location: ./login.php");
 }
 
+
+
 $cliente_id = $_SESSION["cliente_id"];
-$sql = "SELECT c.*, p.nome_produto, p.imagem, p.categoria FROM carrinhos c JOIN produtos p ON c.produto_id = p.id WHERE c.clientes_id = $cliente_id";
+$sql = "
+SELECT 
+    p.id AS produto_id,
+    p.nome_produto,
+    p.imagem,
+    p.categoria,
+    p.preco,
+    ci.quantidade,
+    (p.preco * ci.quantidade) AS subtotal
+FROM carrinhos c
+JOIN carrinho_itens ci ON c.id = ci.carrinho_id
+JOIN produtos p ON ci.produtos_id = p.id
+WHERE c.clientes_id = $cliente_id AND c.status = 'aberto'
+";
 
 $result = $conn->query($sql);
 
@@ -46,10 +61,10 @@ if (!$result) {
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-md-2">
-                        <img src="<?= $item['imagem'] ?>" class="img-fluid" alt="Produto">
+                        <img src="../<?= $item['imagem'] ?>" class="img-fluid" alt="Produto">
                     </div>
                     <div class="col-md-4">
-                        <h5 class="mb-1"><?= $item['nome'] ?></h5>
+                        <h5 class="mb-1"><?= $item['nome_produto'] ?></h5>
                         <p class="mb-1">Categoria: <?= $item['categoria'] ?></p>
                     </div>
                     <div class="col-md-2">
@@ -59,7 +74,7 @@ if (!$result) {
                         <h6 class="mb-0">R$<?= number_format($item['preco'], 2, ',', '.') ?></h6>
                     </div>
                     <div class="col-md-2 text-end">
-                        <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                        <button type="button" class="btn btn-danger" onclick="removerProduto(<?=$item['produto_id']?>)"><i class="fa fa-trash"></i></button>
                     </div>
                 </div>
             </div>
@@ -73,6 +88,17 @@ if (!$result) {
             <p>Seu carrinho está vazio.</p>
         <?php endif; ?>
     </div>
+    <script>
+
+        function removerProduto(idProduto){
+            
+            if(confirm("Tem certeza que deseja excluir esta compra?")){
+                //chamar url para excluir produto 
+                fetch("remover-produto.php?id=" + idProduto)
+                    .then(response => window.location.reload(true));
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 <?php include "./footer.php" ?>

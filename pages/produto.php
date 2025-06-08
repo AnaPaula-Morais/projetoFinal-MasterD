@@ -62,9 +62,12 @@
             <?php echo $produto["nome_produto"];?>
           </h4>
           <div class="d-flex flex-row my-3">
-           
-            <span class="text-muted"><?php echo $produto["estoque"];?></span>
-            <span class="text-success ms-2">Em stock</span>
+            <?php if($produto["estoque"] > 0): ?>
+              <span class="text-muted"><?php echo $produto["estoque"];?></span>
+              <span class="text-success ms-2">Em stock</span>
+            <?php else: ?>
+              <span class="text-danger fw-bold"> Estoque Indisponível </span>
+            <?php endif; ?>
           </div>
           <i class=""></i>
           <div class="mb-3">
@@ -93,7 +96,7 @@
                 <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark" onclick="alterarQuantidade(-1)">
                   <i class="fas fa-minus"></i>
                 </button>
-                <input id="quantidade" type="text" class="form-control text-center border border-secondary" placeholder="<?php echo $produto['estoque'] ?>" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                <input id="quantidade" type="text" value="1" class="form-control text-center border border-secondary"  aria-label="Quantidade" aria-describedby="button-addon1" />
                 <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark" onclick="alterarQuantidade(1)">
                 <i class="fa-solid fa-plus"></i>
                 </button>
@@ -101,7 +104,19 @@
             </div>
           </div>
           <a href="#" class="btn btn-warning shadow-0"> Comprar </a>
-          <a href="./carrinho.php" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Adicionar ao carrinho </a>
+          <?php  if($produto["estoque"] > 0):?>
+            <form method="post" action="add-ao-carrinho.php">
+              <input type="hidden" name="produto_id" value="<?= $produto['id'] ?>">
+              <input type="hidden" name="quantidade" id="quantidade_input" value="1">
+              <button type="submit" class="btn btn-primary shadow-0">
+                <i class="me-1 fa fa-shopping-basket"></i> Adicionar ao carrinho
+              </button>
+            </form> 
+          <?php else: ?>
+            <button class="btn btn-secondary shadow-0" disabled>
+              <i class="me-1 fa fa-shopping-basket"></i> Produto Indisponível
+            </button>
+          <?php endif;?>
         </div>
       </main>
     </div>
@@ -117,12 +132,14 @@
     const estoque = <?php echo $produto['estoque']; ?>;
     function alterarQuantidade(valor){
       const input = document.getElementById("quantidade");
-      //atalho para tratar valores inválidos ou vazios. Ele vai tentar converter o conteúdo do input para número, se não acontecer ele vai usar o número 1
       let atual = parseInt(input.value) || 1;
       atual += valor;
       if(atual < 1) atual =  1;
       if(atual > estoque) atual = estoque;
       input.value = atual;
+
+ 
+      document.getElementById("quantidade_input").value = atual;
     }
 </script>
 
