@@ -21,6 +21,8 @@ services:
           target: /var/www/html
   db:
     image: mariadb
+    ports:
+      - 3306:3306
     restart: always
     user: root
     secrets:

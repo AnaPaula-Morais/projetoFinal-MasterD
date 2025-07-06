@@ -2,6 +2,8 @@
   session_start();
   include "../config.php";
   $base_path = "../";
+
+  $msg = "";
   
   //verificar se o formulário foi enviado utilizando o método post
   if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -29,6 +31,8 @@
         exit();
 
       }elseif($user['user_type'] == 'admin'){
+        $_SESSION["admin_logado"] = true;
+        $_SESSION["admin_email"] = $user["eamil"];
         header("location: perfil-admin.php");
         exit();
       }

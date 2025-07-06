@@ -68,10 +68,10 @@ if (!$result) {
                         <p class="mb-1">Categoria: <?= $item['categoria'] ?></p>
                     </div>
                     <div class="col-md-2">
-                        <input type="number" class="form-control text-center" value="<?= $item['quantidade'] ?>" min="1">
+                        <input type="number" class="form-control text-center quantidade-input" value="<?= $item['quantidade'] ?>" min="1" data-preco="<?= $item['preco'] ?>"onchange="atualizarValores(this)">
                     </div>
                     <div class="col-md-2">
-                        <h6 class="mb-0">R$<?= number_format($item['preco'], 2, ',', '.') ?></h6>
+                        <h6 class="mb-0">R$ <span class="subtotal"><?= number_format($item['preco'], 2, ',', '.') ?></span></h6>
                     </div>
                     <div class="col-md-2 text-end">
                         <button type="button" class="btn btn-danger" onclick="removerProduto(<?=$item['produto_id']?>)"><i class="fa fa-trash"></i></button>
@@ -81,8 +81,8 @@ if (!$result) {
         </div>
         <?php endwhile; ?>       
         <div class="text-end">
-            <h5>Total: R$ <?= number_format($total, 2, ',', '.') ?></h5>
-            <a href="finalizar.php" class="btn btn-success">Finalizar Compra</a>
+            <h5>Total: R$ <span id="total-geral"><?= number_format($total, 2, ',', '.') ?></span></h5>
+            <a href="./pag-encomenda.php" class="btn btn-success">Finalizar Compra</a>
         </div>
         <?php else: ?>
             <p>Seu carrinho está vazio.</p>
@@ -97,6 +97,24 @@ if (!$result) {
                 fetch("remover-produto.php?id=" + idProduto)
                     .then(response => window.location.reload(true));
             }
+        }
+
+        function atualizarValores(input){
+            const preco = parseFloat(input.dataset.preco);
+            const quantidade = parseInt(input.value);
+            const sobtotalElemento = input.closest('.row').querySelector('.subtotal');
+
+            const novosubtotal = (preco * quantidade).toFixed(2);
+            sobtotalElemento.innerText = novosubtotal.replace('.', ',');
+
+            let total = 0;
+            document.querySelectorAll('.quantidade-input').forEach(inp => {
+                const p  = parseFloat(inp.dataset.preco);
+                const q = parseInt(inp.value);
+                total += p * q;
+            })
+
+            document.getElementById("total-geral").innerText = total.toFixed(2).replace('.', ',');
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
