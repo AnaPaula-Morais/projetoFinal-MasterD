@@ -61,41 +61,37 @@
     <div class="row">
       <div class="col-md-7">
         <h4 class="mb-3">Informações do Cliente</h4>
-        <form>
+        <form method="post" action="finalizar-encomenda.php">
           <div class="row">
             <div class="col-sm-6 mb-3">
-              <label for="nome" class="form-label">Nome</label>
-              <input type="text" class="form-control" id="nome" value="<?= $cliente['nome'] ?>" required>
+              <label for="nome" class="form-label">Nome Completo</label>
+              <input type="text" class="form-control" name="nome" id="nome" value="<?= $cliente['nome']?>" required>
             </div>
-            <div class="col-sm-6 mb-3">
-              <label for="nome" class="form-label">Apelido</label>
-              <input type="text" class="form-control" id="nome" value="<?= $cliente['apelido'] ?>" required>
-            </div>
+           
             <div class="col-sm-6 mb-3">
               <label for="email" class="form-label">E-mail</label>
-              <input type="email" class="form-control" id="email" value="<?= $cliente['email'] ?>" required>
+              <input type="email" class="form-control" name="email" id="email" value="<?= $cliente['email'] ?>" required>
             </div>
           </div>
 
           <div class="mb-3">
             <label for="endereco" class="form-label">Endereço</label>
-            <input type="text" class="form-control" id="endereco" placeholder="Rua Exemplo, 123" required>
+            <input type="text" class="form-control" name="morada" id="morada" placeholder="Rua Exemplo, 123" required>
           </div>
 
           <div class="row">
             <div class="col-md-5 mb-3">
               <label for="cidade" class="form-label">Cidade</label>
-              <input type="text" class="form-control" id="cidade" required>
+              <input type="text" class="form-control" name="cidade" id="cidade" required>
             </div>
             
             <div class="col-md-3 mb-3">
               <label for="data_nasc" class="form-label">Data de nascimento</label>
-              <input type="date" class="form-control" id="data_nasc" required>
+              <input type="date" class="form-control" name="data_nascimento" id="data_nasc" required>
             </div>
           </div>
-
           <hr class="my-4">
-
+          <input type="hidden" name="preco_total" value="<?= $total ?>">
           <button class="btn btn-primary btn-lg btn-block" type="submit">Finalizar Encomenda</button>
         </form>
       </div>
@@ -103,13 +99,17 @@
       
       <div class="col-md-5">
         <h4 class="mb-3">Resumo do Pedido</h4>
-        <?php if($result->num_rows > 0 ): ?>
+        <?php 
+        $total = 0;
+        if($result->num_rows > 0 ): ?>
             <?php  
-                $total = 0;
+                
                 while($item = $result->fetch_assoc()):
                 $subtotal = $item['quantidade'] * $item['preco'];
                 $total += $subtotal;
+
         ?>
+         <input type="hidden" name="preco_total" value="<?= $total?>">
         <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
