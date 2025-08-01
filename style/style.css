@@ -1,0 +1,13 @@
+#sobre{
+    background-color: #FFE6A5 ;
+}
+
+.icones{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 8px;
+    padding: 10px;
+    width: 300px;
+    height: 150px;
+    
+}

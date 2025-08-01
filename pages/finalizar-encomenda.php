@@ -74,6 +74,9 @@ $stmtInsert = $conn->prepare($sqlInsert);
 $stmtInsert->bind_param("sssds", $nome_cliente, $morada, $cidade, $total, $data_nasc);
 $stmtInsert->execute();
 
+// inserir itens na tabela encomenda-produtos
+//iterara sobre os dados do carrinho-itens
+//tenho que copiar o que está no carriho para a tabela encomenda-produtos
 
 $sqlUpdate = "UPDATE carrinhos SET status = 'finalizado' WHERE id = ?";
 $stmtUpdate = $conn->prepare($sqlUpdate);
