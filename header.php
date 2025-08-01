@@ -23,12 +23,12 @@
               <a class="nav-link active text-white" aria-current="page" href="../index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#" role="button">
+              <a class="nav-link text-white" href="#produtos" role="button">
                 Produtos
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">Contactos</a>
+              <a class="nav-link text-white" href="#contactos">Contactos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="./pages/login.php">Administracao</a>
@@ -37,7 +37,6 @@
         </div>
 
         <div class="d-flex">
-          <i class="fa fa-search mx-3" style="font-size:20px; color: white; margin-right: 20px;"></i>
           <a href="./pages/login.php">
             <i class="fa fa-user-circle-o mx-3" style="font-size:20px; color: white; margin-right: 20px;"></i>
           </a>

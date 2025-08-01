@@ -34,7 +34,7 @@ $result = $conn->query($sql);
   include "header.php";
   include "carousel.html";
   ?>
-  <div class="container mt-4">
+  <div id="produtos" class="container mt-4">
     <h2 class="p-4 text-center">Nossos Produtos</h2>
     <div class="row p-4">
       <!--$result->fetch_assoc(): este é um método do objeto $result que obtém a próxima linha do conjunto de resultados da consulta SQL-->
@@ -63,7 +63,7 @@ $result = $conn->query($sql);
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
   <!--seccao sobre-->
-  <div id="sobre" class="sobre pb-5">
+  <div id="sobre" class="sobre p-5">
     <h2 class="text-center p-4">Sobre</h2>
     <div class="row align-items-center">
       <div class="col-md-6 text-center">
@@ -76,7 +76,7 @@ $result = $conn->query($sql);
     </div>
   </div>
   <!--seccao contatos-->
-  <div class="mb-5">
+  <div id="contactos" class="mb-5">
     <h2 class="text-center p-5">Contactos</h2>
     <div class="row justify-content-center align-items-center">
       <div class="icones col-md-3 text-center d-flex flex-column justify-content-center"><i class="fa-solid fa-location-dot"></i><br>Rua dos Bobos, N0</div>
