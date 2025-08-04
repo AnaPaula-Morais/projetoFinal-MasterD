@@ -31,7 +31,7 @@
               <a class="nav-link text-white" href="#contactos">Contactos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="./pages/login.php">Administracao</a>
+              <a class="nav-link text-white" href="./login.php">Administracao</a>
             </li>
           </ul>
         </div>
