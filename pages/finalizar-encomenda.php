@@ -37,12 +37,13 @@ if ($idade < 18) {
 
 
 $sqlCarrinho = "
-SELECT c.id AS carrinho_id, p.preco, ci.quantidade
+SELECT c.id AS carrinho_id, p.id AS produto_id, p.preco, ci.quantidade
 FROM carrinhos c
 JOIN carrinho_itens ci ON c.id = ci.carrinho_id
 JOIN produtos p ON ci.produtos_id = p.id
 WHERE c.clientes_id = ? AND c.status = 'aberto'
 ";
+
 $stmtCarrinho = $conn->prepare($sqlCarrinho);
 $stmtCarrinho->bind_param("i", $cliente_id);
 $stmtCarrinho->execute();
@@ -74,9 +75,25 @@ $stmtInsert = $conn->prepare($sqlInsert);
 $stmtInsert->bind_param("sssds", $nome_cliente, $morada, $cidade, $total, $data_nasc);
 $stmtInsert->execute();
 
+$encomendas_id = $conn->insert_id;
+
 // inserir itens na tabela encomenda-produtos
+$stmtCarrinho = $conn->prepare($sqlCarrinho);
+$stmtCarrinho->bind_param("i", $cliente_id);
+$stmtCarrinho->execute();
+$resultCarrinho = $stmtCarrinho->get_result();
+
+
 //iterara sobre os dados do carrinho-itens
-//tenho que copiar o que está no carriho para a tabela encomenda-produtos
+while ($item = $resultCarrinho->fetch_assoc()) {
+    $sqlInsert = "INSERT INTO encomenda_produtos (encomenda_id, produto_id, quantidade, preco_unitario)
+VALUES (?, ?, ?, ?)";
+
+    $stmtInsert = $conn->prepare($sqlInsert);
+    $stmtInsert->bind_param("iiid", $encomendas_id, $item["produto_id"], $item["quantidade"], $item["preco"]);
+    $stmtInsert->execute();
+}
+
 
 $sqlUpdate = "UPDATE carrinhos SET status = 'finalizado' WHERE id = ?";
 $stmtUpdate = $conn->prepare($sqlUpdate);
