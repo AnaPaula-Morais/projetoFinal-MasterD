@@ -48,10 +48,20 @@
       crossorigin="anonymous"
     />
     <!--link font awesome-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+   <script src="https://kit.fontawesome.com/d9115d1b88.js" crossorigin="anonymous"></script>
+
+   <style>
+    .form-login {
+      margin: 0 auto;
+      padding-top: 3%;
+      width: 50%;
+    }
+
+    .form-floating {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  </style>
   </head>
   <body class="p-0 m-0">
     <?php include "../header.php"; ?> 
@@ -136,11 +146,9 @@
           </button>
         </form>
 
-        
-        _________________________________________________________________
 
         <div id="emailHelp" class="form-text">Já tem conta?</div>
-        <button type="submit" class="btn btn-primary">Faça login</button>
+        <button type="submit" class="btn btn-primary" onclick="window.location.href='login.php'">Faça login</button>
       </main>
     </div>
 
@@ -149,8 +157,11 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <?php 
+    <div class="container">
+      <?php 
       include "footer.php";
     ?>
+    </div>
+    
   </body>
 </html>

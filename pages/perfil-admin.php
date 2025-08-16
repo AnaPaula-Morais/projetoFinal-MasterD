@@ -154,7 +154,10 @@ $produtos_result = $conn->query("SELECT * FROM produtos");
         </div>
 
     </div>
-    <?php include "./footer.php" ?>
+    <div class="container">
+        <?php include "./footer.php" ?>
+    </div>
+    
 </body>
 
 </html>
